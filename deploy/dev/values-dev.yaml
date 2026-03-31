@@ -4,8 +4,8 @@
 
 # ── Image ─────────────────────────────────────────────────────────────────────
 image:
-  repository: ibmwebmethods.azurecr.io/webmethods-microservicesruntime
-  tag: "11.1"
+  repository: localhost/mondiruntime
+  tag: "latest"
 
 imagePullSecrets:
   - name: wm-registry-secret
