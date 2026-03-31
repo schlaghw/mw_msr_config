@@ -1,0 +1,42 @@
+# Helm values for MSR - Test Environment
+# Chart: https://github.com/IBM/webmethods-helm-charts/tree/main/microservicesruntime/helm
+# Only non-default values are specified here
+
+# ── Image ─────────────────────────────────────────────────────────────────────
+image:
+  repository: ibmwebmethods.azurecr.io/webmethods-microservicesruntime
+  tag: "11.1"
+
+imagePullSecrets:
+  - name: wm-registry-secret
+
+# ── Replica count ─────────────────────────────────────────────────────────────
+replicaCount: 2
+
+# ── Microservices Runtime Configuration ───────────────────────────────────────
+microservicesruntime:
+  memoryHeap:
+    min: 512
+    max: 1024
+
+# ── Resources ─────────────────────────────────────────────────────────────────
+resources:
+  requests:
+    cpu: "500m"
+    memory: "1536Mi"
+  limits:
+    cpu: "1000m"
+    memory: "2Gi"
+
+# ── Service ───────────────────────────────────────────────────────────────────
+service:
+  type: NodePort
+  nodePort: 30655
+  httpsNodePort: 30643
+
+# ── Environment-specific labels ───────────────────────────────────────────────
+podLabels:
+  environment: test
+  tier: testing
+
+# Made with Bob

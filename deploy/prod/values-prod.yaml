@@ -1,0 +1,42 @@
+# Helm values for MSR - Production Environment
+# Chart: https://github.com/IBM/webmethods-helm-charts/tree/main/microservicesruntime/helm
+# Only non-default values are specified here
+
+# ── Image ─────────────────────────────────────────────────────────────────────
+image:
+  repository: ibmwebmethods.azurecr.io/webmethods-microservicesruntime
+  tag: "11.1"
+
+imagePullSecrets:
+  - name: wm-registry-secret
+
+# ── Replica count ─────────────────────────────────────────────────────────────
+replicaCount: 3
+
+# ── Microservices Runtime Configuration ───────────────────────────────────────
+microservicesruntime:
+  memoryHeap:
+    min: 1024
+    max: 2048
+
+# ── Resources ─────────────────────────────────────────────────────────────────
+resources:
+  requests:
+    cpu: "1000m"
+    memory: "2560Mi"
+  limits:
+    cpu: "2000m"
+    memory: "4Gi"
+
+# ── Service ───────────────────────────────────────────────────────────────────
+service:
+  type: NodePort
+  nodePort: 30755
+  httpsNodePort: 30743
+
+# ── Environment-specific labels ───────────────────────────────────────────────
+podLabels:
+  environment: prod
+  tier: production
+
+# Made with Bob
